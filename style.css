@@ -17,7 +17,7 @@ body {
 }
 /* Remember these for every theme ;) */
 
-html[data-theme="light"] {
+html[data-theme="dark"] {
   --bg-primary: #e3e4eb;
   --bg-secondary: white;
   --fg-primary: #2b2b2b;
@@ -37,7 +37,7 @@ html[data-theme="light"] {
   --solution: #cfc;
 }
 
-html[data-theme="dark"] {
+html[data-theme="light"] {
   --bg-primary: #333;
   --bg-secondary: #222;
   --fg-primary: white;
