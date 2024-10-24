@@ -56,6 +56,7 @@
 
         "sword": "Меч",
         "axe": "Сякера",
+        "mace": "Булава",
         "trident": "Трызубец",
         "pickaxe": "Кірка",
         "shovel": "Рыдлёўка",
@@ -113,6 +114,9 @@
         "thorns": "Калючкі",
         "unbreaking": "Мацунак",
         "binding_curse": "Праклён няздымнасці",
-        "vanishing_curse": "Праклён знікнення"
+        "vanishing_curse": "Праклён знікнення",
+        "density": "Шчыльнасць",
+        "breach": "Пралом",
+        "wind_burst": "Парыў"
     }
 }
