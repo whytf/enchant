@@ -19,14 +19,16 @@ const languages = {
     'nl'    : 'Nederlands',
     'pl-PL' : 'Polski',
     'pt-BR' : 'Português',
+    'vi-VN' : 'Tiếng Việt',
     'tr-TR' : 'Türkçe',
     'be-BY' : 'Беларуская',
     'ru-RU' : 'Русский',
     'ua-UA' : 'Українська',
+    'th-TH' : 'ภาษาไทย',
     'zh-CN' : '中文',
     'ja-JP' : '日本語',
-    'th-TH' : 'ภาษาไทย',
-    'vi-VN' : 'Tiếng Việt',
+    'ko-KR' : '한국어',
+
 };
 
 const languages_cache_key = 6;
