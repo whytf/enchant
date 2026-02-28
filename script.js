@@ -16,6 +16,8 @@ const languages = {
     'es-ES' : 'Español',
     'fr-FR' : 'Français',
     'it-IT' : 'Italiano',
+    'id'    : 'Indonesia',
+    'hu-HU' : 'Magyar',
     'nl'    : 'Nederlands',
     'pl-PL' : 'Polski',
     'pt-BR' : 'Português',
@@ -25,13 +27,23 @@ const languages = {
     'ru-RU' : 'Русский',
     'ua-UA' : 'Українська',
     'th-TH' : 'ภาษาไทย',
-    'zh-CN' : '中文',
+    'zh-CN' : '简体中文',
+    'zh-TW' : '繁體中文',
     'ja-JP' : '日本語',
     'ko-KR' : '한국어',
-
+    'ar'    : 'اَلْعَرَبِيَّةُ',
 };
 
 const languages_cache_key = 6;
+
+const prefers_color_scheme = window.matchMedia("(prefers-color-scheme: dark)");
+if (prefers_color_scheme.matches) {
+    document.documentElement.dataset.theme = 'dark';
+    localStorage.setItem("tswitch-theme", 'dark');
+} else {
+    document.documentElement.dataset.theme = 'light';
+    localStorage.setItem("tswitch-theme", 'light');
+}
 
 window.onload = function() {
 
@@ -707,12 +719,34 @@ async function changePageLanguage(language){
     }
 
     languageId = language;
-    languageJson = await loadJsonLanguage(language).then(languageData => { return languageData});
+    if (language == 'en'){
+      languageJson = await loadJsonLanguage(language).then(languageData => { return languageData});
+    }else{
+      var languageJsonEn = await loadJsonLanguage('en').then(languageData => { return languageData});
+      languageJson = await loadJsonLanguage(language).then(languageData => { return languageData});
+      languageJson = mergeKeys(languageJson, languageJsonEn);
+    }
     if (languageJson){
         changeLanguageByJson(languageJson);
         localStorage.setItem("savedlanguage", language);
         // ^ Save language choice to localstorage
     }
+}
+
+function mergeKeys(a, b){
+  var o = {};
+  for (var i in b){
+    if (typeof b[i] === 'object'){
+      o[i] = mergeKeys(a.hasOwnProperty(i) ? a[i] : {}, b[i]);
+    }else{
+      if (a.hasOwnProperty(i)){
+        o[i] = a[i]
+      }else{
+        o[i] = b[i];
+      }
+    }
+  }
+  return o;
 }
 
 function loadJsonLanguage(language) {
@@ -745,6 +779,11 @@ function changeLanguageByJson(languageJson){
 
     const h1Element = document.getElementsByTagName('h1')[0];
     h1Element.textContent = languageJson.h1_title;
+
+    /* summaries */
+    const summaries = document.getElementsByTagName('summary');
+    summaries[0].innerHTML = languageJson.summary_1;
+    summaries[1].innerHTML = languageJson.summary_2;
 
     /* paragraphs */
     const paragraphs = document.getElementsByTagName('p');
