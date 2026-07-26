@@ -179,15 +179,31 @@ function buildEnchantList(item_namespace_chosen) {
 
     let group_toggle_color = true;
 
+    function getWikiSubdomainLanguage() {
+        const wiki_supported_languages = ["de", "es", "fr", "it", "ja", "ko", "lzh", "nl", "pt", "ru", "th", "uk", "zh"]
+        let wiki_language = "en";
+
+        if(wiki_supported_languages.includes(languageId.slice(0,2))) {
+            wiki_language = languageId.slice(0,2);
+        }
+
+        return wiki_language;
+    }
+
     enchantment_groups.forEach(enchantment_group => {
         enchantment_group.forEach(enchantment_namespace => {
             const enchantment_metadata = enchantments_metadata[enchantment_namespace];
             const enchantment_max_level = enchantment_metadata.levelMax;
             const enchantment_name = languageJson.enchants[enchantment_namespace];
 
+            const safe_namespace = encodeURIComponent(enchantment_name.replaceAll(" ", "_"));
+            const wiki_language = getWikiSubdomainLanguage();
+            const enchantment_wiki_url = `https://${wiki_language}.minecraft.wiki/w/${safe_namespace}`;
+
             const enchantment_row = $("<tr>");
             enchantment_row.addClass(group_toggle_color ? "group1" : "group2");
-            enchantment_row.append($("<td>").append(enchantment_name));
+            const enchantment_cell_content = `${enchantment_name} (<a class="wiki_url" href="${enchantment_wiki_url}">wiki</a>)`
+            enchantment_row.append($("<td>").html(enchantment_cell_content));
             for (let enchantment_level = 1; enchantment_level <= enchantment_level_maxmax; enchantment_level++) {
                 if (enchantment_max_level >= enchantment_level) {
                     const enchantment_button_data = {
