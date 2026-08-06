@@ -202,7 +202,7 @@ function buildEnchantList(item_namespace_chosen) {
 
             const enchantment_row = $("<tr>");
             enchantment_row.addClass(group_toggle_color ? "group1" : "group2");
-            const enchantment_cell_content = `${enchantment_name} (<a class="wiki_url" href="${enchantment_wiki_url}">wiki</a>)`
+            const enchantment_cell_content = `<a class="wiki_url" href="${enchantment_wiki_url}">${enchantment_name}</a>`
             enchantment_row.append($("<td>").html(enchantment_cell_content));
             for (let enchantment_level = 1; enchantment_level <= enchantment_level_maxmax; enchantment_level++) {
                 if (enchantment_max_level >= enchantment_level) {

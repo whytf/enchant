@@ -302,6 +302,15 @@ summary {
     font-size: 12px;
 }
 
+#enchants td .wiki_url {
+    color: var(--table-text);
+    text-decoration: none;
+}
+
+#enchants td .wiki_url:hover {
+    text-decoration: underline;
+}
+
 #enchants button {
     background-color: var(--echlevel-bg);
     padding: 10px;
